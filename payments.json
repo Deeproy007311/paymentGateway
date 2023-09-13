@@ -1,0 +1,9 @@
+[
+{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"paymentgateway_db"},
+{"type":"table","name":"payments","database":"paymentgateway_db","data":
+[
+
+]
+}
+]
