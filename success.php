@@ -1,15 +1,11 @@
 <?php
-// Check if the required POST data is present
 if (isset($_POST['razorpay_order_id']) && isset($_POST['razorpay_payment_id']) && isset($_POST['razorpay_amount'])) {
-    // Get the POST data from Razorpay
     $order_id = $_POST['razorpay_order_id'];
     $payment_id = $_POST['razorpay_payment_id'];
     $amount = $_POST['razorpay_amount'];
 
-    // Validate the payment data (e.g., check if the payment amount matches the expected amount)
-    $expected_amount = $_POST['amount'] * 100; // Convert to the same format as Razorpay
+    $expected_amount = $_POST['amount'] * 100; 
     if ($amount == $expected_amount) {
-        // Database connection code (as previously shown)
         $servername = "localhost";
         $username = "root";
         $password = "";
@@ -21,7 +17,6 @@ if (isset($_POST['razorpay_order_id']) && isset($_POST['razorpay_payment_id']) &
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Insert the payment data into the database
         $sql = "INSERT INTO `payments` (`order_id`, `payment_id`, `payment_amount`,` payment_status`) VALUES ('$order_id', '$payment_id', '$amount', 'success')";
 
         if ($conn->query($sql) === TRUE) {
@@ -30,7 +25,6 @@ if (isset($_POST['razorpay_order_id']) && isset($_POST['razorpay_payment_id']) &
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
 
-        // Close the database connection
         $conn->close();
     } else {
         echo "Payment data validation failed. Amount mismatch.";
